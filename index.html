@@ -10,5 +10,61 @@
     <script src="app.js"></script>
   </head>
   <body>
+    <script type="text/x-handlebars">
+        <header>
+          <h1>Ember.js ブログ</h1>
+        </header>
+      
+        {{outlet}}
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="index">
+        <div id="hello-message">ようこそ</div>
+      
+        {{link-to "記事を見る" "posts"}}
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="posts">
+        <aside id="sidebar">
+          <ul>
+            {{#each post in model}}
+              <li>{{link-to post.title "posts.show" post}}</li>
+            {{/each}}
+          </ul>
+        </aside>
+      
+        <main>
+          {{outlet}}
+        </main>
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="posts/index">
+        記事を選択してください。
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="posts/show">
+        <h2>{{model.title}}</h2>
+      
+        <pre>
+          {{model.body}}
+        </pre>
+      </script>
+
+      <script type="text/x-handlebars" data-template-name="loading">
+        現在データを読込中です…
+      </script>
+
+      <script type="text/x-handlebars" data-template-name="error">
+        おや，何か様子がおかしいです。
+        {{link-to "もう一度読み込む" "posts"}}
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="not_found">
+        お探しの記事は見つかりませんでした。
+      </script>
+      
+      <script type="text/x-handlebars" data-template-name="something_went_wrong">
+        おや，何か様子がおかしいです。
+      </script>
   </body>
 </html>
